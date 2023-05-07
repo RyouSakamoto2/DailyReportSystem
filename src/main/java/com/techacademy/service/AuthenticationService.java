@@ -26,4 +26,5 @@ public class AuthenticationService {
     public Authentication saveAuthentication(Authentication authentication) {
         return authenticationRepository.save(authentication);
     }
+    
 }

@@ -9,5 +9,4 @@ public class DailyReportSystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DailyReportSystemApplication.class, args);
 	}
-
 }

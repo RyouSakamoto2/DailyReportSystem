@@ -42,5 +42,5 @@ public class Authentication {
     @OneToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
-
+    
 }
