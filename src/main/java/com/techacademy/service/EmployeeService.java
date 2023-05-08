@@ -1,7 +1,6 @@
 package com.techacademy.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -37,12 +36,4 @@ public class EmployeeService {
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
-
-    /** Employeeの削除を行なう  */
-    @Transactional
-    public Employee deleteEmployee(Employee employee,int deleteFlag) {
-        deleteFlag = 1;
-        return employeeRepository.save(employee);
-    }
-    
 }

@@ -1,7 +1,5 @@
 package com.techacademy.controller;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.techacademy.entity.Employee;
-import com.techacademy.repository.EmployeeRepository;
 import com.techacademy.service.EmployeeService;
 
 @Controller
@@ -51,6 +48,7 @@ public class EmployeeController {
             return getRegister(employee);
         }
         // Employee登録
+        employee.getAuthentication().setEmployee(employee);
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
         return "redirect:/employee/list";
@@ -78,18 +76,10 @@ public class EmployeeController {
     @PostMapping("/update/{id}/")
     public String postEmployee(Employee employee) {
         // Employeeの更新
+        employee.getAuthentication().setEmployee(employee);
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
         return "redirect:/employee/list";
     }
 
-    /** Employee削除処理 */
-    @PostMapping("/delete/{id}/")
-    public String deleteEmployee(Employee employee, int deleteFlag) {
-        // Employeeの削除（deleteFlagに1を立てる）
-        service.deleteEmployee(employee, deleteFlag);
-        // 一覧画面にリダイレクト
-        return "redirect:/employee/list";
-    }
-    
 }

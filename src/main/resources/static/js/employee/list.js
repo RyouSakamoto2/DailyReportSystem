@@ -1,1 +1,0 @@
-var rowcount = targetTable.rows.length;
