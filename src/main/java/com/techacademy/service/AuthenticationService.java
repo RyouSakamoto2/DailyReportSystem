@@ -21,10 +21,15 @@ public class AuthenticationService {
         // リポジトリのfindAllメソッドを呼び出す
         return authenticationRepository.findAll();
     }
+    
+    /** Authenticationを1件検索して返す */
+    public Authentication getAuthentication(String code) {
+        return authenticationRepository.findById(code).get();
+    }
+
     /** Authenticationの登録を行なう */
     @Transactional
     public Authentication saveAuthentication(Authentication authentication) {
         return authenticationRepository.save(authentication);
     }
-    
 }

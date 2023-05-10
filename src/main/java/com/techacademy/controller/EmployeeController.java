@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.techacademy.entity.Authentication;
 import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
 
@@ -74,12 +75,26 @@ public class EmployeeController {
 
     /** Employee更新処理 */
     @PostMapping("/update/{id}/")
-    public String postEmployee(Employee employee) {
-        // Employeeの更新
-        employee.getAuthentication().setEmployee(employee);
-        service.saveEmployee(employee);
+    public String postEmployee(@PathVariable("id") Integer id, Employee employee, Authentication authentication) {
+        // DBからEmployeeを呼び出し、変数databaseEmpを宣言、画面から得た情報を取得
+        Employee databaseEmp = service.getEmployee(id);
+        databaseEmp.setName(employee.getName());
+        databaseEmp.getAuthentication().setPassword(employee.getAuthentication().getPassword());
+        databaseEmp.getAuthentication().setRole(employee.getAuthentication().getRole());
+        databaseEmp.setUpdatedAt(employee.getUpdatedAt());
+        service.saveEmployee(databaseEmp);
         // 一覧画面にリダイレクト
         return "redirect:/employee/list";
     }
-
+    /** Employee削除処理 */
+    @GetMapping("/delete/{id}/")
+    public String deleteEmployee(@PathVariable("id") Integer id, Employee employee, Authentication authentication) {
+        // DBからEmployeeを呼び出し、変数databaseEmpを宣言、画面から得た情報を取得
+        // Employeeのdelete_flagに１を立てる
+        Employee deleteEmp = service.getEmployee(id);
+        deleteEmp.setDelete_flag(1);
+        service.saveEmployee(deleteEmp);
+        // 一覧画面にリダイレクト
+        return "redirect:/employee/list";
+    }
 }
