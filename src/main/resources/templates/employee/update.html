@@ -24,7 +24,8 @@
     <h1>id:</h1><h1 th:text="${employee.id}"></h1><h1>の従業員情報 編集ページ</h1>
     <form method="post" th:action="@{/employee/update/{id}/(id=${employee.id})}">
         <label for="employee.authentication.code">社員番号</label>
-        <input type="hidden" id="employee.authentication.code" name="employee.authentication.code" th:value="*{employee.authentication.code}" th:text="*{employee.authentication.code}">
+        <input type="hidden" id="employee.authentication.code" name="employee.authentication.code" th:value="*{employee.authentication.code}" th:text="*{employee.authentication.code}" th:errorclass="err"> 
+        <span th:errors="*{employee.authentication.code}" class="err"></span>
         <br>
         <br>
         <label for="employee.name">名　　前</label>

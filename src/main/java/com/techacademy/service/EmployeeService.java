@@ -2,6 +2,9 @@ package com.techacademy.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +38,10 @@ public class EmployeeService {
     @Transactional
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
+    }
+    
+    /** ペジネーション  */
+    public Page<Employee> getCountEmployee(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
     }
 }

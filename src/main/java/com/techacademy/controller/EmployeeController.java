@@ -1,5 +1,9 @@
 package com.techacademy.controller;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,9 +31,12 @@ public class EmployeeController {
 
     /** 一覧画面を表示 */
     @GetMapping("/list")
-    public String getList(Model model) {
+    public String getList(Model model, Pageable pageable) {
         // 全件検索結果をModelに登録
         model.addAttribute("employeelist", service.getEmployeeList());
+        // ページ情報をModelに登録
+        Page<Employee> page = service.getCountEmployee(pageable);
+        model.addAttribute("totalItems", page.getTotalElements());
         // employee/list.htmlに画面遷移
         return "employee/list";
     }
@@ -86,6 +93,7 @@ public class EmployeeController {
         // 一覧画面にリダイレクト
         return "redirect:/employee/list";
     }
+
     /** Employee削除処理 */
     @GetMapping("/delete/{id}/")
     public String deleteEmployee(@PathVariable("id") Integer id, Employee employee, Authentication authentication) {
@@ -97,4 +105,5 @@ public class EmployeeController {
         // 一覧画面にリダイレクト
         return "redirect:/employee/list";
     }
+
 }
