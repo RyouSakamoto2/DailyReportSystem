@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Daily Report System</title>
+    <link rel="stylesheet" th:href="@{/css/toppage.css}">
+</head>
+<body>
+    <header class="header">
+        <div class="header_inner">
+            <h2 class="title">日報管理システム</h2>
+
+            <nav id="global_navi">
+                <ul>
+                    <li><form method="post" th:action="@{/logout}"><input type="submit" value="ログアウト"></form></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- /header_inner -->
+</body>
+</html>
