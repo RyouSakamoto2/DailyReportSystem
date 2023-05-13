@@ -8,4 +8,5 @@ import com.techacademy.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
     public Page<Employee> findAll(Pageable pageable);
+    
 }

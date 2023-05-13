@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.techacademy.entity.Authentication;
 import com.techacademy.entity.Employee;
 import com.techacademy.repository.EmployeeRepository;
 
@@ -39,7 +41,7 @@ public class EmployeeService {
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
-    
+
     /** ペジネーション  */
     public Page<Employee> getCountEmployee(Pageable pageable) {
         return employeeRepository.findAll(pageable);
