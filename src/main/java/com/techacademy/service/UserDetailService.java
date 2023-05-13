@@ -13,7 +13,7 @@ import com.techacademy.repository.AuthenticationRepository;
 @Service
 public class UserDetailService implements UserDetailsService {
     private final AuthenticationRepository authenticationRepository;
-
+    
     public UserDetailService(AuthenticationRepository repository) {
         this.authenticationRepository = repository;
     }
@@ -27,4 +27,5 @@ public class UserDetailService implements UserDetailsService {
         }
         return new UserDetail(authentication.get().getEmployee());
     }
+
 }

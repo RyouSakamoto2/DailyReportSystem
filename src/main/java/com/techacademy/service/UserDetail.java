@@ -1,9 +1,11 @@
 package com.techacademy.service;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.techacademy.entity.Employee;
@@ -15,8 +17,11 @@ public class UserDetail implements UserDetails {
     private final Collection<? extends GrantedAuthority> authorities;
 
     public UserDetail(Employee employee) {
+
         this.employee = employee;
-        this.authorities = new ArrayList<GrantedAuthority>();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority(employee.getAuthentication().getRole().toString()));
+        this.authorities = authorities;
     }
 
     public Employee getUser() {

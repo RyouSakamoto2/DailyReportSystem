@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.techacademy.entity.Authentication;
 import com.techacademy.entity.Employee;
 import com.techacademy.repository.EmployeeRepository;
 
@@ -36,9 +35,14 @@ public class EmployeeService {
         return employeeRepository.findById(id).get();
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     /** Employeeの登録を行なう  */
     @Transactional
     public Employee saveEmployee(Employee employee) {
+        /**パスワード暗号化  */
+        employee.getAuthentication().setPassword(passwordEncoder.encode(employee.getAuthentication().getPassword()));
         return employeeRepository.save(employee);
     }
 
