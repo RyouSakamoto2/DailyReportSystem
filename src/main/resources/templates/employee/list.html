@@ -10,6 +10,10 @@
         <div class="header_inner">
             <h2 class="title">日報管理システム</h2>
 
+            <form method="post" th:action="@{/logout}">
+                <input type="submit" value="ログアウト">
+            </form><br>
+
             <nav id="global_navi">
                 <ul>
                     <li><a href="http://localhost:8080/employee/list">従業員管理</a></li>
