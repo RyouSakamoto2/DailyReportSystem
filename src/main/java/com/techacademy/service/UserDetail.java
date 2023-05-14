@@ -14,7 +14,7 @@ public class UserDetail implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private final Employee employee;
-    private final Collection<? extends GrantedAuthority> authorities;
+    private final List<SimpleGrantedAuthority> authorities;
 
     public UserDetail(Employee employee) {
 
