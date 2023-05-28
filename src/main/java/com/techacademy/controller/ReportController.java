@@ -2,6 +2,7 @@ package com.techacademy.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.techacademy.entity.Employee;
 import com.techacademy.entity.Report;
 import com.techacademy.service.ReportService;
+import com.techacademy.service.UserDetail;
 
 @Controller
 @RequestMapping("report")
@@ -28,9 +29,12 @@ public class ReportController {
 
     /** 一覧画面を表示 */
     @GetMapping("/list")
-    public String getList(Model model, Pageable pageable) {
+    public String getList(@AuthenticationPrincipal UserDetail userDetail, Model model, Pageable pageable) {
         // 全件検索結果をModelに登録
         model.addAttribute("reportlist", service.getReportList());
+        //UserDetailからログインユーザの名前情報を取得
+        String employeeName = userDetail.getUser().getName();
+        model.addAttribute("employeeName", employeeName);
         // ページ情報をModelに登録
         Page<Report> page = service.getCountReport(pageable);
         model.addAttribute("totalItems", page.getTotalElements());
@@ -40,17 +44,20 @@ public class ReportController {
 
     /** Report登録画面を表示 */
     @GetMapping("/register")
-    public String getRegister(@ModelAttribute Report reports) {
+    public String getRegister(@AuthenticationPrincipal UserDetail userDetail, @ModelAttribute Report reports, Model model) {
+        //UserDetailからログインユーザの名前情報を取得
+        String employeeName = userDetail.getUser().getName();
+        model.addAttribute("employeeName", employeeName);
         // Employee登録画面に遷移
         return "report/register";
     }
 
     /** Report登録処理 */
     @PostMapping("/register")
-    public String postRegister(@Validated Report report, BindingResult res, Model model) {
+    public String postRegister(@AuthenticationPrincipal UserDetail userDetail, @Validated Report report, BindingResult res, Model model) {
         if (res.hasErrors()) {
             // エラーあり
-            return getRegister(report);
+            return getRegister(userDetail, report, model);
         }
         // Report登録
         service.saveReport(report);
@@ -60,7 +67,10 @@ public class ReportController {
 
     /** Report詳細画面を表示 */
     @GetMapping("/detail/{id}/")
-    public String showDetail(@PathVariable("id") Integer id, Model model) {
+    public String showDetail(@AuthenticationPrincipal UserDetail userDetail, @PathVariable("id") Integer id, Model model) {
+        //UserDetailからログインユーザの名前情報を取得
+        String employeeName = userDetail.getUser().getName();
+        model.addAttribute("employeeName", employeeName);
         // Modelに登録
         model.addAttribute("report", service.getReport(id));
         // Report詳細画面に遷移
@@ -69,7 +79,10 @@ public class ReportController {
 
     /** Report更新画面を表示 */
     @GetMapping("/update/{id}/")
-    public String getEmployee(@PathVariable("id") Integer id, Model model) {
+    public String getEmployee(@AuthenticationPrincipal UserDetail userDetail, @PathVariable("id") Integer id, Model model) {
+        //UserDetailからログインユーザの名前情報を取得
+        String employeeName = userDetail.getUser().getName();
+        model.addAttribute("employeeName", employeeName);
         // Modelに登録
         model.addAttribute("report", service.getReport(id));
         // Employee更新画面に遷移

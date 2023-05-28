@@ -2,6 +2,7 @@ package com.techacademy.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.techacademy.entity.Authentication;
 import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
+import com.techacademy.service.UserDetail;
 
 @Controller
 @RequestMapping("employee")
@@ -29,9 +31,12 @@ public class EmployeeController {
 
     /** 一覧画面を表示 */
     @GetMapping("/list")
-    public String getList(Model model, Pageable pageable) {
+    public String getList(@AuthenticationPrincipal UserDetail userDetail, Model model, Pageable pageable) {
         // 全件検索結果をModelに登録
         model.addAttribute("employeelist", service.getEmployeeList());
+        //UserDetailからログインユーザの名前情報を取得
+        String employeeName = userDetail.getUser().getName();
+        model.addAttribute("employeeName", employeeName);
         // ページ情報をModelに登録
         Page<Employee> page = service.getCountEmployee(pageable);
         model.addAttribute("totalItems", page.getTotalElements());
@@ -41,17 +46,20 @@ public class EmployeeController {
 
     /** Employee登録画面を表示 */
     @GetMapping("/register")
-    public String getRegister(@ModelAttribute Employee employee) {
+    public String getRegister(@AuthenticationPrincipal UserDetail userDetail, @ModelAttribute Employee employee, Model model) {
+        //UserDetailからログインユーザの名前情報を取得
+        String employeeName = userDetail.getUser().getName();
+        model.addAttribute("employeeName", employeeName);
         // Employee登録画面に遷移
         return "employee/register";
     }
 
     /** Employee登録処理 */
     @PostMapping("/register")
-    public String postRegister(@Validated Employee employee, BindingResult res, Model model, Authentication authentication) {
+    public String postRegister(@Validated Employee employee, BindingResult res, Model model, Authentication authentication, UserDetail userDetail) {
         if (res.hasErrors()) {
             // エラーあり
-            return getRegister(employee);
+            return getRegister(userDetail, employee, model);
         }
         // Employee登録
         employee.getAuthentication().setEmployee(employee);
@@ -62,7 +70,10 @@ public class EmployeeController {
 
     /** Employee詳細画面を表示 */
     @GetMapping("/detail/{id}/")
-    public String showDetail(@PathVariable("id") Integer id, Model model) {
+    public String showDetail(@AuthenticationPrincipal UserDetail userDetail, @PathVariable("id") Integer id, Model model) {
+        //UserDetailからログインユーザの名前情報を取得
+        String employeeName = userDetail.getUser().getName();
+        model.addAttribute("employeeName", employeeName);
         // Modelに登録
         model.addAttribute("employee", service.getEmployee(id));
         // Employee詳細画面に遷移
@@ -71,7 +82,10 @@ public class EmployeeController {
 
     /** Employee更新画面を表示 */
     @GetMapping("/update/{id}/")
-    public String getEmployee(@PathVariable("id") Integer id, Model model) {
+    public String getEmployee(@AuthenticationPrincipal UserDetail userDetail, @PathVariable("id") Integer id, Model model) {
+        //UserDetailからログインユーザの名前情報を取得
+        String employeeName = userDetail.getUser().getName();
+        model.addAttribute("employeeName", employeeName);
         // Modelに登録
         model.addAttribute("employee", service.getEmployee(id));
         // Employee更新画面に遷移
