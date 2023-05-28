@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <title>Daily Report System</title>
+    <link rel="stylesheet" th:href="@{/css/report/detail.css}">
+</head>
+<body>
+    <header class="header">
+        <div class="header_inner">
+        <h2 class="title">日報管理システム</h2>
+
+        <nav id="global_navi">
+        <ul>
+        <li><a href="http://localhost:8080/employee/list">従業員管理</a></li>
+        <li><a href="http://localhost:8080/report/list">日報管理</a></li>
+        <li><div th:text="${#authentication.name} + ' さん'"></div></li>
+        <li><form method="post" th:action="@{/logout}"><input type="submit" value="ログアウト"></form></li>
+        </ul>
+        </nav>
+        </div>
+    </header><!-- /header_inner -->
+
+    <h1>日報 詳細ページ</h1>
+    <table>
+      <tr>
+        <td class="Horizontal-heading">氏　　名</td>
+        <td th:text="${report.employee.name}"></td>
+      </tr>
+      <tr>
+        <td class="Horizontal-heading">日　　付</td>
+        <td th:text="${report.reportDate}"></td>
+      </tr>
+      <tr>
+        <td class="Horizontal-heading">タイトル</td>
+        <td th:text="${report.title}"></td>
+      </tr>
+      <tr>
+        <td class="Horizontal-heading">内　容</td>
+        <td th:text="${report.content}"></td>
+      </tr>
+      <tr>
+        <td class="Horizontal-heading">登録日時</td>
+        <td th:text="${#temporals.format(report.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+      </tr>
+      <tr>
+        <td class="Horizontal-heading">更新日時</td>
+        <td th:text="${#temporals.format(report.updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+      </tr>
+    </table>
+    <a sec:authorize="authenticated" th:href="@{/report/update/{id}/(id=${report.id})}">この日報を編集する</a>
+    <br>
+    <a th:href="@{/report/list}">一覧に戻る</a>
+</body>
+</html>

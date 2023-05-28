@@ -3,7 +3,7 @@
     <head>
     <meta charset="utf-8">
     <title>Daily Report System</title>
-    <link rel="stylesheet" th:href="@{/css/employee/register.css}">
+    <link rel="stylesheet" th:href="@{/css/report/register.css}">
 </head>
 <body>
       <header class="header">
@@ -21,27 +21,27 @@
         </div>
       </header><!-- /header_inner -->
 
-    <h1>従業員 新規登録ページ</h1>
-    <form method="post" th:action="@{/employee/register}">
-        <label for="code">社員番号</label>
-        <input type="text" th:field="*{employee.authentication.code}">
+    <h1>日報 新規登録ページ</h1>
+    <form method="post" th:action="@{/report/register}">
+        <label for="reportDate">日　　付</label>
+        <input type="date" th:field="*{report.reportDate}" required pattern="\d{4}-\d{2}-\d{2}" />
+        <span class="validity"></span>
         <br>
-        <label for="name">名　　前</label>
-        <input type="text" th:field="*{employee.name}">
         <br>
-        <label for="name">パスワード</label>
-        <input type="text" th:field="*{employee.authentication.password}">
+        <label for="name">氏　　名</label>
+        <input type="hidden" id="${#authentication.name}" name="${#authentication.name}" th:value="${#authentication.name}" th:text="${#authentication.name}">
         <br>
-        <label for="role">権　　限</label>
-        <select th:field="*{employee.authentication.role}">
-        <option value="" th:text="選択してください">
-        <option th:each="item:${T(com.techacademy.entity.Authentication.Role).values()}" th:value="${item}" th:text="${item}">
-        </select>
+        <br>
+        <label for="title">タイトル</label>
+        <input type="text" th:field="*{report.title}" class="report_title">
+        <br>
+        <label for="content">内　　容</label>
+        <input type="text" th:field="*{report.content}" class="content">
         <br>
         <br>
         <input type="submit" value="投稿">
     </form>
-    <br>
-    <a th:href="@{/employee/list}">一覧に戻る</a>
+  <br>
+  <a th:href="@{/report/list}">一覧に戻る</a>
 </body>
 </html>

@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+.header_inner{
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px 100px;
+    background-color:#000000;
+    display: flex;
+    align-items: center;
+    font-family:'Century Gothic', '游ゴシック', 'Meiryo';
+    color: #ffffff;
+}
+
+.title{
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.form input[type="submit"]{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    column-gap: 1px;
+}
+
+#global_navi {
+    margin-bottom: 12px;
+}
+
+#global_navi ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    column-gap: 1px;
+}
+
+#global_navi ul li {
+    width: 140px;
+    text-align: center;
+}
+
+#global_navi ul li a {
+    display: block;
+    padding: 10px 16px;
+    background-color: #000000;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color .2s linear;
+}
+
+#global_navi ul li.current a {
+    background-color: #000000;
+}
+
+#global_navi ul li a:hover {
+    background-color: #808080;
+}
+
+body{
+  max-width: 1000px;
+  margin: auto;
+  display: block;
+  align-items: center;
+  font-family:'Century Gothic', '游ゴシック', 'Meiryo';
+}
+
+table{
+  border-collapse:separate;
+  border-spacing: 0;
+}
+
+table th:first-child{
+  border-radius: 5px 0 0 0;
+}
+
+table th:last-child{
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #000000;
+}
+
+table th{
+  text-align: center;
+  color:white;
+  background: linear-gradient(#696969,#000000);
+  border: 1px solid #343434;
+  border-top: 1px solid #343434;
+  border-bottom: 1px solid #343434;
+  box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
+  width: 25%;
+  padding: 10px 0;
+}
+
+table td{
+  text-align: center;
+  border: 1px solid #696969;
+  border-bottom: 1px solid #696969;
+  border-top:none;
+  box-shadow: 0px -3px 5px 1px #eee inset;
+  width: 25%;
+  padding: 10px 0;
+}

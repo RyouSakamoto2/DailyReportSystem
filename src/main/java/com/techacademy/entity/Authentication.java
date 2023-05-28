@@ -24,7 +24,6 @@ public class Authentication {
         一般, 管理者
     }
 
-    /** 主キー。Null不許可 */
     @Id
     @Column(length = 20, nullable = false)
     @NotEmpty

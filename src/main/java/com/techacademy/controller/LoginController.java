@@ -11,5 +11,4 @@ public class LoginController {
         // login.htmlに画面遷移
         return "login";
     }
-
 }
