@@ -23,5 +23,5 @@ public class AuthenticationController {
         service.saveAuthentication(authentication);
         // 一覧画面にリダイレクト
         return "redirect:/employee/list";
-    }
+    } 
 }

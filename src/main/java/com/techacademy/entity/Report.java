@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
@@ -30,29 +31,29 @@ public class Report{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     /** 日報日付。null不許可 */
     @Column(nullable = false)
-    @NotEmpty
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reportDate;
-    
+
     /** 日報タイトル。null不許可 */
     @Column(nullable = false)
     @NotEmpty
     private String title;
-    
+
     /** 日報内容。null不許可 */
     @Column(nullable = false)
     @NotEmpty
     @Type(type="text")
     private String content;
-    
+
     /**従業員テーブルのID。*/
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
-    
+
     /** 登録日時 */
     @Column(updatable = false, nullable = false)
     @CreationTimestamp

@@ -24,12 +24,12 @@
     <h1>日報 編集ページ</h1>
     <form method="post" th:action="@{/report/update/{id}/(id=${report.id})}">
         <label for="reportDate">日　　付</label>
-        <input type="date" id="report.reportDate" name="report.reportDate" th:value="*{report.reportDate}" th:errorclass="err" required pattern="\d{4}-\d{2}-\d{2}" />
+        <input type="date" id="*{report.reportDate}" name="*{report.reportDate}" th:field="*{report.reportDate}" th:errorclass="err" required pattern="\d{4}-\d{2}-\d{2}" />
         <span th:errors="*{report.reportDate}" class="err"></span>
         <br>
         <br>
         <label for="name">氏　　名</label>
-        <input type="hidden" id="${report.employee.name}" name="${report.employee.name}" th:value="${report.employee.name}" th:text="${report.employee.name}">
+        <input type="hidden" id="${employeeName}" name="${employeeName}" th:value="${employeeName}" th:text="${employeeName}">
         <br>
         <br>
         <label for="title">タイトル</label>

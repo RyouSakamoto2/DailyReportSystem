@@ -56,11 +56,7 @@ public class EmployeeController {
 
     /** Employee登録処理 */
     @PostMapping("/register")
-    public String postRegister(@Validated Employee employee, BindingResult res, Model model, Authentication authentication, UserDetail userDetail) {
-        if (res.hasErrors()) {
-            // エラーあり
-            return getRegister(userDetail, employee, model);
-        }
+    public String postRegister(@Validated Employee employee, BindingResult res, Model model, Authentication authentication) {
         // Employee登録
         employee.getAuthentication().setEmployee(employee);
         service.saveEmployee(employee);

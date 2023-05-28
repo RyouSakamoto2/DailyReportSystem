@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.techacademy.entity.Employee;
 import com.techacademy.entity.Report;
 import com.techacademy.service.ReportService;
 import com.techacademy.service.UserDetail;
@@ -60,6 +61,8 @@ public class ReportController {
             return getRegister(userDetail, report, model);
         }
         // Report登録
+        Employee employee = userDetail.getUser();
+        report.setEmployee(employee);
         service.saveReport(report);
         // 一覧画面にリダイレクト
         return "redirect:/report/list";
@@ -71,6 +74,9 @@ public class ReportController {
         //UserDetailからログインユーザの名前情報を取得
         String employeeName = userDetail.getUser().getName();
         model.addAttribute("employeeName", employeeName);
+        //UserDetailからログインユーザの社員番号情報を取得
+        int employeeId = userDetail.getUser().getId();
+        model.addAttribute("employeeId", employeeId);
         // Modelに登録
         model.addAttribute("report", service.getReport(id));
         // Report詳細画面に遷移
@@ -83,7 +89,7 @@ public class ReportController {
         //UserDetailからログインユーザの名前情報を取得
         String employeeName = userDetail.getUser().getName();
         model.addAttribute("employeeName", employeeName);
-        // Modelに登録
+        // 日報情報をModelに登録
         model.addAttribute("report", service.getReport(id));
         // Employee更新画面に遷移
         return "report/update";
@@ -92,8 +98,10 @@ public class ReportController {
     /** Report更新処理 */
     @PostMapping("/update/{id}/")
     public String postReport(@PathVariable("id") Integer id, Report report) {
-     // DBからreportを呼び出し、変数databaseRepを宣言、画面から得た情報を取得
+        // DBからreportを呼び出し、変数databaseRepを宣言、画面から得た情報を取得
         Report databaseRep = service.getReport(id);
+
+        databaseRep.getEmployee().getName();
         databaseRep.setReportDate(report.getReportDate());
         databaseRep.setTitle(report.getTitle());
         databaseRep.setContent(report.getContent());

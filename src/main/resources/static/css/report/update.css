@@ -80,12 +80,14 @@ label {
 input.report_title {
     width: 300px;
     height:30px;
+    vertical-align:top;
     font-family:'Century Gothic', '游ゴシック', 'Meiryo';
 }
 
 input.content {
     width: 500px;
     height:100px;
+    vertical-align:top;
     font-family:'Century Gothic', '游ゴシック', 'Meiryo';
 }
 

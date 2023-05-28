@@ -86,6 +86,7 @@ input.report_title {
 input.content {
     width: 500px;
     height:100px;
+    vertical-align:top;
     font-family:'Century Gothic', '游ゴシック', 'Meiryo';
 }
 
