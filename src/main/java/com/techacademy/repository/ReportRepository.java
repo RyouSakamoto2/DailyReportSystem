@@ -15,5 +15,4 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
     public Long countById(Long id);
     public List<Report> findByEmployee(Employee employee);
     public Optional<Report> findById(Integer id);
-
 }
