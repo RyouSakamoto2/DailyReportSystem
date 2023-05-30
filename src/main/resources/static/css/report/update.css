@@ -84,7 +84,7 @@ input.report_title {
     font-family:'Century Gothic', '游ゴシック', 'Meiryo';
 }
 
-input.content {
+textarea {
     width: 500px;
     height:100px;
     vertical-align:top;

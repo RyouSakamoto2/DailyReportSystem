@@ -33,14 +33,24 @@ public class ReportService {
     public Report getReport(Integer id) {
         return reportRepository.findById(id).get();
     }
+    /** ログイン社員のみの日報を検索して返す  */
+    public List<Report> findByEmployee(Employee employee){
+        return reportRepository.findByEmployee(employee);
+    }
 
     /** Reportの登録を行なう  */
     @Transactional
     public Report saveReport(Report report) {
         return reportRepository.save(report);
     }
-    /** ペジネーション  */
+
+    /** ログイン社員のみの日報の件数をカウント */
+    public Long getCountReportById(Long id){
+        return reportRepository.countById(id);
+    }
+    /** ペジネーション(全件)  */
     public Page<Report> getCountReport(Pageable pageable) {
         return reportRepository.findAll(pageable);
     }
+
 }

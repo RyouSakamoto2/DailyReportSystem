@@ -21,5 +21,29 @@
         </div>
     </header>
     <!-- /header_inner -->
+
+    <h1>日報管理システムへようこそ</h1>
+    <h2>【自分の日報　一覧】</h2>
+
+    <table id="targetTable">
+        <tr>
+            <th>氏名</th>
+            <th>日付</th>
+            <th>タイトル</th>
+            <th>操作</th>
+        </tr>
+        <tbody>
+            <tr th:each="report : ${reportlist}">
+                <td th:text="${report.employee.name}"></td>
+                <td th:text="${report.reportDate}"></td>
+                <td th:text="${report.Title}"></td>
+                <td><a th:href="@{/report/detail/{id}/(id=${report.id})}">詳細を見る</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <span>(全 </span> <span th:text="${reportcount}"></span><span> 件)</span>
+    <br>
+    <a th:href="@{/report/register}">新規日報の登録</a>
 </body>
 </html>

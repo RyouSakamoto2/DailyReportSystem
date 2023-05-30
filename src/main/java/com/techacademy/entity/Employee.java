@@ -66,8 +66,12 @@ public class Employee{
     @Transactional
     private void preRemove() {
         // 認証エンティティからemployeeを切り離す
-        if (authentication!=null) {
+        if (authentication != null) {
             authentication.setEmployee(null);
+        }
+        // Reportエンティティからemployeeを切り離す
+        if (reports != null) {
+            ((Report) reports).setEmployee(null);
         }
     }
 }

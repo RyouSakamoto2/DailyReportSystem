@@ -59,10 +59,6 @@
     background-color: #808080;
 }
 
-h1{
-  display: inline;
-}
-
 body{
   max-width: 1000px;
   margin: auto;
@@ -71,19 +67,38 @@ body{
   font-family:'Century Gothic', '游ゴシック', 'Meiryo';
 }
 
-label {
-    display:block;
-    width: 8em;
-    line-height: 150%;
+table{
+  border-collapse:separate;
+  border-spacing: 0;
 }
 
-input {
-    display:block;
-    width: 8em;
-    line-height: 150%;
+table th:first-child{
+  border-radius: 5px 0 0 0;
 }
 
+table th:last-child{
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #000000;
+}
 
-.err {
-    color: red;
+table th{
+  text-align: center;
+  color:white;
+  background: linear-gradient(#696969,#000000);
+  border: 1px solid #343434;
+  border-top: 1px solid #343434;
+  border-bottom: 1px solid #343434;
+  box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
+  width: 25%;
+  padding: 10px 0;
+}
+
+table td{
+  text-align: center;
+  border: 1px solid #696969;
+  border-bottom: 1px solid #696969;
+  border-top:none;
+  box-shadow: 0px -3px 5px 1px #eee inset;
+  width: 25%;
+  padding: 10px 0;
 }

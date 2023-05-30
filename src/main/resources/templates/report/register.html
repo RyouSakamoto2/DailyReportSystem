@@ -36,7 +36,7 @@
         <input type="text" th:field="*{report.title}" class="report_title">
         <br>
         <label for="content">内　　容</label>
-        <input type="text" th:field="*{report.content}" class="content">
+        <textarea id="*{report.content}" name="*{report.content}" th:field="*{report.content}"></textarea>
         <br>
         <br>
         <input type="submit" value="投稿">
