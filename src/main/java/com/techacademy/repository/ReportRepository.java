@@ -12,7 +12,7 @@ import com.techacademy.entity.Report;
 
 public interface ReportRepository extends JpaRepository<Report, Integer> {
     public Page<Report> findAll(Pageable pageable);
-    public Long countById(Long id);
     public List<Report> findByEmployee(Employee employee);
     public Optional<Report> findById(Integer id);
+    public Long countByEmployeeId(Integer id);
 }

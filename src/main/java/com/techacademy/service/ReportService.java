@@ -44,13 +44,14 @@ public class ReportService {
         return reportRepository.save(report);
     }
 
-    /** ログイン社員のみの日報の件数をカウント */
-    public Long getCountReportById(Long id){
-        return reportRepository.countById(id);
-    }
     /** ペジネーション(全件)  */
     public Page<Report> getCountReport(Pageable pageable) {
         return reportRepository.findAll(pageable);
     }
 
+    /** ログインしている社員の日報の件数をカウント  */
+    public Long countByEmployeeId(Integer id){
+        return reportRepository.countByEmployeeId(id);
+    }
+    
 }
