@@ -12,8 +12,8 @@
 
             <nav id="global_navi">
                 <ul>
-                    <li><a href="http://localhost:8080/employee/list">従業員管理</a></li>
-                    <li><a href="http://localhost:8080/report/list">日報管理</a></li>
+                    <li><a href="http://localhost/employee/list">従業員管理</a></li>
+                    <li><a href="http://localhost/report/list">日報管理</a></li>
                     <li><div th:text="${employeeName} + ' さん'"></div></li>
                     <li><form method="post" th:action="@{/logout}"><input type="submit" value="ログアウト"></form></li>
                 </ul>
